@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Xml;
 
@@ -20,7 +20,7 @@ namespace SvgLib
             if (!element.HasAttribute(name)) return defaultValue;
             try
             {
-                return (T)Convert.ChangeType(element.GetAttribute(name), typeof(T));
+                return (T)Convert.ChangeType(element.GetAttribute(name), typeof(T), CultureInfo.InvariantCulture);
             }
             catch
             {
