@@ -1,4 +1,4 @@
-﻿namespace SvgLib
+namespace SvgLib
 {
     public static class SvgDefaults
     {
@@ -10,7 +10,7 @@
                 public static readonly double StrokeOpacity = 1;
                 public static readonly double StrokeWidth = 0;
                 public static readonly LineJoin StrokeLineJoin = LineJoin.Miter;
-                public static readonly LineCap StrokeLineCap = LineCap.Butt;
+                public static readonly SvgStrokeLineCap StrokeLineCap = SvgStrokeLineCap.Butt;
                 public static readonly string Fill = "#000000";
                 public static readonly string Stroke = "#000000";
                 public static readonly double Opacity = 1;
@@ -22,6 +22,8 @@
                 public static readonly double Y = 0;
                 public static readonly double CX = 0;
                 public static readonly double CY = 0;
+                public static readonly double DX = 0;
+                public static readonly double DY = 0;
             }
 
             public static class Size
@@ -48,7 +50,8 @@
             {
                 public static readonly double FontSize = 16;
                 public static readonly string FontFamily = "Helvetica, Arial, sans-serif";
-                public static readonly TextAnchor TextAnchor = TextAnchor.Start;
+                public static readonly SvgTextAnchor TextAnchor = SvgTextAnchor.Start;
+                public static readonly SvgDominantBaseline DominantBaseline = SvgDominantBaseline.Auto;
             }
         }
     }
@@ -56,15 +59,5 @@
     public enum LineJoin
     {
         Miter
-    }
-
-    public enum LineCap
-    {
-        Butt
-    }
-
-    public enum TextAnchor
-    {
-        Start
     }
 }

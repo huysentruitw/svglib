@@ -1,4 +1,4 @@
-﻿using System.Xml;
+using System.Xml;
 
 namespace SvgLib
 {
@@ -22,5 +22,7 @@ namespace SvgLib
         public SvgPath AddPath() => SvgPath.Create(Element);
 
         public SvgRect AddRect() => SvgRect.Create(Element);
+
+        public SvgText AddText() => SvgText.Create(Element);
     }
 }
