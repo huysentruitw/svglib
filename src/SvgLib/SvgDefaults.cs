@@ -14,6 +14,7 @@ namespace SvgLib
                 public static readonly string Fill = "#000000";
                 public static readonly string Stroke = "#000000";
                 public static readonly double Opacity = 1;
+                public static readonly SvgFillRule FillRule = SvgFillRule.NonZero;
             }
 
             public static class Position

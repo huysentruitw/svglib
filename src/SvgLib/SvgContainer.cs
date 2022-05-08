@@ -22,6 +22,8 @@ namespace SvgLib
         public SvgMarker AddMarker() => SvgMarker.Create(Element);
 
         public SvgPath AddPath() => SvgPath.Create(Element);
+        
+        public SvgPolygon AddPolygon() => SvgPolygon.Create(Element);
 
         public SvgRect AddRect() => SvgRect.Create(Element);
 
