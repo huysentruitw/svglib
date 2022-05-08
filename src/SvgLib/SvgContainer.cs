@@ -10,6 +10,8 @@ namespace SvgLib
         }
 
         public SvgCircle AddCircle() => SvgCircle.Create(Element);
+        
+        public SvgClipPath AddClipPath() => SvgClipPath.Create(Element);
 
         public SvgEllipse AddEllipse() => SvgEllipse.Create(Element);
 
