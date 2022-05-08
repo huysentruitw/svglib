@@ -24,6 +24,30 @@ namespace SvgLib
 
         public void Save(Stream stream) => _document.Save(stream);
 
+        public double X
+        {
+            get => Element.GetAttribute("x", 0);
+            set => Element.SetAttribute("x", value);
+        }
+
+        public double Y
+        {
+            get => Element.GetAttribute("y", 0);
+            set => Element.SetAttribute("y", value);
+        }
+
+        public double Width
+        {
+            get => Element.GetAttribute("width", 0);
+            set => Element.SetAttribute("width", value);
+        }
+
+        public double Height
+        {
+            get => Element.GetAttribute("height", 0);
+            set => Element.SetAttribute("height", value);
+        }
+
         public SvgViewBox ViewBox
         {
             get => Element.GetAttribute("viewBox", new SvgViewBox());
