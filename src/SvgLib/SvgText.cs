@@ -79,5 +79,11 @@ namespace SvgLib
             get => Element.GetAttribute<SvgDominantBaseline>("dominant-baseline", SvgDefaults.Attributes.Text.DominantBaseline);
             set => Element.SetAttribute("dominant-baseline", value);
         }
+
+        public SvgFillRule FillRule
+        {
+            get => Element.GetAttribute<SvgFillRule>("fill-rule", SvgDefaults.Attributes.FillAndStroke.FillRule);
+            set => Element.SetAttribute("fill-rule", value);
+        }
     }
 }

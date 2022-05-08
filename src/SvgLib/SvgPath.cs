@@ -27,5 +27,11 @@ namespace SvgLib
             get => Element.GetAttribute("pathLength", 0.0);
             set => Element.SetAttribute("pathLength", value);
         }
+
+        public SvgFillRule FillRule
+        {
+            get => Element.GetAttribute<SvgFillRule>("fill-rule", SvgDefaults.Attributes.FillAndStroke.FillRule);
+            set => Element.SetAttribute("fill-rule", value);
+        }
     }
 }
