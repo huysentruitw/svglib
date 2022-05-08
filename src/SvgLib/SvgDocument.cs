@@ -26,25 +26,25 @@ namespace SvgLib
 
         public double X
         {
-            get => Element.GetAttribute("x", 0);
+            get => Element.GetAttribute("x", SvgDefaults.Attributes.Position.X);
             set => Element.SetAttribute("x", value);
         }
 
         public double Y
         {
-            get => Element.GetAttribute("y", 0);
+            get => Element.GetAttribute("y", SvgDefaults.Attributes.Position.Y);
             set => Element.SetAttribute("y", value);
         }
 
         public double Width
         {
-            get => Element.GetAttribute("width", 0);
+            get => Element.GetAttribute("width", SvgDefaults.Attributes.Size.Width);
             set => Element.SetAttribute("width", value);
         }
 
         public double Height
         {
-            get => Element.GetAttribute("height", 0);
+            get => Element.GetAttribute("height", SvgDefaults.Attributes.Size.Height);
             set => Element.SetAttribute("height", value);
         }
 
