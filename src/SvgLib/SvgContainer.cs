@@ -26,6 +26,8 @@ namespace SvgLib
         public SvgPath AddPath() => SvgPath.Create(Element);
         
         public SvgPolygon AddPolygon() => SvgPolygon.Create(Element);
+        
+        public SvgPolyLine AddPolyLine() => SvgPolyLine.Create(Element);
 
         public SvgRect AddRect() => SvgRect.Create(Element);
 
