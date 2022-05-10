@@ -1,28 +1,20 @@
-﻿using System.IO;
-using System.Xml;
+﻿using System.Xml;
 
 namespace SvgLib
 {
-    public sealed class SvgDocument : SvgContainer
+    public sealed class SvgImage : SvgBasicShape
     {
-        private readonly XmlDocument _document;
-
-        private SvgDocument(XmlDocument document, XmlElement element)
+        private SvgImage(XmlElement element)
             : base(element)
         {
-            _document = document;
         }
 
-        public static SvgDocument Create()
+        internal static SvgImage Create(XmlElement parent)
         {
-            var document = new XmlDocument();
-            var rootElement = document.CreateElement("svg");
-            document.AppendChild(rootElement);
-            rootElement.SetAttribute("xmlns", "http://www.w3.org/2000/svg");
-            return new SvgDocument(document, rootElement);
+            var element = parent.OwnerDocument.CreateElement("image");
+            parent.AppendChild(element);
+            return new SvgImage(element);
         }
-
-        public void Save(Stream stream) => _document.Save(stream);
 
         public double X
         {
@@ -48,10 +40,10 @@ namespace SvgLib
             set => Element.SetAttribute("height", value);
         }
 
-        public SvgViewBox ViewBox
+        public string HRef
         {
-            get => Element.GetAttribute("viewBox", new SvgViewBox());
-            set => Element.SetAttribute("viewBox", value.ToString());
+            get => Element.GetAttribute<string>("xlink:href", "");
+            set => Element.SetAttribute("xlink:href", value);
         }
     }
 }
