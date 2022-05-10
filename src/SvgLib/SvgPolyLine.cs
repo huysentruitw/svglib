@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Xml;
 
 namespace SvgLib
@@ -24,21 +24,15 @@ namespace SvgLib
             get
             {
                 var stringArray = Element.GetAttribute("points");
-                List<double> output = new List<double>();
-                foreach (var stringDouble in stringArray.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    output.Add(double.Parse(stringDouble, CultureInfo.InvariantCulture));
-                }
-                return output.ToArray();
+                return stringArray
+                    .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(value => double.Parse(value, CultureInfo.InvariantCulture))
+                    .ToArray();
             }
             set
             {
-                List<string> output = new List<string>();
-                foreach (var doubleValue in value)
-                {
-                    output.Add(doubleValue.ToString("G", CultureInfo.InvariantCulture));
-                }
-                Element.SetAttribute("points", String.Join(", ", output));
+                var points = string.Join(", ", value.Select(x => x.ToString("G", CultureInfo.InvariantCulture)));
+                Element.SetAttribute("points", points);
             }
         }
     }
