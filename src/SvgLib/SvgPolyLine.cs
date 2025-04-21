@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace SvgLib
@@ -23,15 +24,21 @@ namespace SvgLib
         {
             get
             {
-                var stringArray = Element.GetAttribute("points");
-                return stringArray
-                    .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                var stringArray = Element.GetAttribute<string>("points", "");
+                // since canonically the array can be apparently either "1,2,3,4"/"1, 2, 3, 4"/"1,2 3,4"/...
+                // we should need to split by both ',' and ' '
+                return Regex.Split(stringArray, @"[\s,]+")
+                    .Where(s => !string.IsNullOrWhiteSpace(s))
                     .Select(value => double.Parse(value, CultureInfo.InvariantCulture))
                     .ToArray();
             }
             set
             {
-                var points = string.Join(", ", value.Select(x => x.ToString("G", CultureInfo.InvariantCulture)));
+                // format our double array into "1,2 3,4 5,6"
+                var points = string.Join(" ", 
+                    value.Select((val, index) => new {val, index})
+                        .GroupBy(x => x.index / 2)
+                        .Select(g => string.Join(",", g.Select(x => x.val))));
                 Element.SetAttribute("points", points);
             }
         }
