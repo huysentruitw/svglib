@@ -16,13 +16,13 @@ namespace SvgLib
 
         public string Id
         {
-            get => Element.GetAttribute("id");
+            get => Element.GetAttribute<string>("id", "");
             set => Element.SetAttribute("id", value);
         }
 
         public int? TabIndex
         {
-            get => Element.GetAttribute("tabindex", (int?)null);
+            get => Element.GetAttribute<int?>("tabindex", null);
             set => Element.SetAttribute("tabindex", value);
         }
 
@@ -30,31 +30,31 @@ namespace SvgLib
 
         public string Fill
         {
-            get => Element.GetAttribute("fill", SvgDefaults.Attributes.FillAndStroke.Fill);
+            get => Element.GetAttribute<string>("fill", SvgDefaults.Attributes.FillAndStroke.Fill);
             set => Element.SetAttribute("fill", value);
         }
 
         public double FillOpacity
         {
-            get => Element.GetAttribute("fill-opacity", SvgDefaults.Attributes.FillAndStroke.FillOpacity);
+            get => Element.GetAttribute<double>("fill-opacity", SvgDefaults.Attributes.FillAndStroke.FillOpacity);
             set => Element.SetAttribute("fill-opacity", value);
         }
 
         public string Stroke
         {
-            get => Element.GetAttribute("stroke", SvgDefaults.Attributes.FillAndStroke.Stroke);
+            get => Element.GetAttribute<string>("stroke", SvgDefaults.Attributes.FillAndStroke.Stroke);
             set => Element.SetAttribute("stroke", value);
         }
 
         public double StrokeOpacity
         {
-            get => Element.GetAttribute("stroke-opacity", SvgDefaults.Attributes.FillAndStroke.StrokeOpacity);
+            get => Element.GetAttribute<double>("stroke-opacity", SvgDefaults.Attributes.FillAndStroke.StrokeOpacity);
             set => Element.SetAttribute("stroke-opacity", value);
         }
 
         public double StrokeWidth
         {
-            get => Element.GetAttribute("stroke-width", SvgDefaults.Attributes.FillAndStroke.StrokeWidth);
+            get => Element.GetAttribute<double>("stroke-width", SvgDefaults.Attributes.FillAndStroke.StrokeWidth);
             set => Element.SetAttribute("stroke-width", value);
         }
 
@@ -66,7 +66,7 @@ namespace SvgLib
 
         public string Transform
         {
-            get => Element.GetAttribute("transform");
+            get => Element.GetAttribute<string>("transform", "");
             set => Element.SetAttribute("transform", value);
         }
 

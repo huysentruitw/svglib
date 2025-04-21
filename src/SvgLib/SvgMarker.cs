@@ -18,31 +18,31 @@ namespace SvgLib
 
         public double RefX
         {
-            get => Element.GetAttribute("refX", 0.0);
+            get => Element.GetAttribute<double>("refX", SvgDefaults.Attributes.Position.X);
             set => Element.SetAttribute("refX", value);
         }
 
         public double RefY
         {
-            get => Element.GetAttribute("refY", 0.0);
+            get => Element.GetAttribute<double>("refY", SvgDefaults.Attributes.Position.Y);
             set => Element.SetAttribute("refY", value);
         }
 
         public double Width
         {
-            get => Element.GetAttribute("markerWidth", 0.0);
+            get => Element.GetAttribute<double>("markerWidth", SvgDefaults.Attributes.Size.Width);
             set => Element.SetAttribute("markerWidth", value);
         }
 
         public double Height
         {
-            get => Element.GetAttribute("markerHeight", 0.0);
+            get => Element.GetAttribute<double>("markerHeight", SvgDefaults.Attributes.Size.Height);
             set => Element.SetAttribute("markerHeight", value);
         }
 
         public SvgViewBox ViewBox
         {
-            get => Element.GetAttribute("viewBox", new SvgViewBox());
+            get => Element.GetAttribute<SvgViewBox>("viewBox", new SvgViewBox());
             set => Element.SetAttribute("viewBox", value.ToString());
         }
     }

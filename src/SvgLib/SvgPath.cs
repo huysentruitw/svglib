@@ -18,13 +18,13 @@ namespace SvgLib
 
         public string D
         {
-            get => Element.GetAttribute("d");
+            get => Element.GetAttribute<string>("d", "");
             set => Element.SetAttribute("d", value);
         }
 
         public double Length
         {
-            get => Element.GetAttribute("pathLength", 0.0);
+            get => Element.GetAttribute<double>("pathLength", SvgDefaults.Attributes.Size.Width);
             set => Element.SetAttribute("pathLength", value);
         }
 
