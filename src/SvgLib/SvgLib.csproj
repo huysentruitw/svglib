@@ -27,7 +27,7 @@
     <LangVersion>latest</LangVersion>
     <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
     <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
-    <HollowKnightRefs>../HkRefs</HollowKnightRefs>
+    <HollowKnightRefs>../../../HkRefs</HollowKnightRefs>
     <ExportDir>bin/Publish</ExportDir>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
