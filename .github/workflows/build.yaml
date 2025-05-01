@@ -41,7 +41,7 @@ jobs:
         working-directory: hk-mod
 
       - name: Build hk-mod
-        run: dotnet build -c Release /p:AssemblyVersion=${{ steps.tag_number.outputs.tag_number }}
+        run: dotnet build -c Release /p:Version=${{ steps.tag_number.outputs.tag_number }}
         working-directory: hk-mod
 
       - name: Prepare hk-mod artifacts for release
