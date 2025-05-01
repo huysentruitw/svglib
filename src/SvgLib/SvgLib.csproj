@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>net45;net472;netstandard2.0</TargetFrameworks>
     <Title>SvgLib</Title>
     <Description>Lightweight SVG library for .NET Framework, .NET Standard and .NET Core.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -13,5 +11,38 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/huysentruitw/svglib</RepositoryUrl>
   </PropertyGroup>
-  
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <Product>$(Title)</Product>
+    <RootNamespace>$(Title)</RootNamespace>
+    <AssemblyName>$(Title)</AssemblyName>
+    <AssemblyTitle>$(Title)</AssemblyTitle>
+    <Copyright>Copyright © $(Company) 2025</Copyright>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <ImplicitUsings>false</ImplicitUsings>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <OutputPath>bin/$(Configuration)/</OutputPath>
+    <LangVersion>latest</LangVersion>
+    <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
+    <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
+    <HollowKnightRefs>../HkRefs</HollowKnightRefs>
+    <ExportDir>bin/Publish</ExportDir>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
+  <Import Project="build_steps.targets" />
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('$(AssemblyOriginatorKeyFile)') ">
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(HollowKnightRefs)/*.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../.gitignore" />
+    <None Include="../../LICENSE" />
+    <None Include="../../ModDependencies.txt" />
+    <None Include="../../README.md" />
+  </ItemGroup>
 </Project>

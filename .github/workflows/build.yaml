@@ -1,0 +1,91 @@
+name: Full Build
+
+permissions:
+  contents: write
+
+# Trigger when pushing tags
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Get tag number from tag string
+        id: tag_number
+        run: |
+          orig_tag="${{ github.ref_name }}"
+          echo "tag_number=${orig_tag/v/}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Checkout hk-mod
+        uses: actions/checkout@v4
+        with:
+          ref: hk-mod
+          path: hk-mod
+
+      - name: Setup MAPI
+        uses: BadMagic100/setup-hk@v2
+        with:
+          apiPath: HkRefs
+          dependencyFilePath: hk-mod/ModDependencies.txt
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+
+      - name: Install dependencies hk-mod
+        run: dotnet restore
+        working-directory: hk-mod
+
+      - name: Build hk-mod
+        run: dotnet build -c Release /p:AssemblyVersion=${{ steps.tag_number.outputs.tag_number }}
+        working-directory: hk-mod
+
+      - name: Prepare hk-mod artifacts for release
+        uses: actions/upload-artifact@v4
+        with:
+          name: Publish-HK-Mod
+          path: hk-mod/src/SvgLib/bin/Publish
+
+  release:
+    needs:
+      - build
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Get build details
+        id: details
+        # this assumes that an MSBuild task that writes the SHA256 of the zip file to SHA.txt, and the mod version (usually
+        # the same as the assembly version) to version.txt. The contents of these files are read to step outputs for use in release
+        run: |
+          $sha = (Get-Content artifacts/Publish-HK-Mod/SvgLib/SHA.txt)[3]
+          $ver = "${{ github.ref_name }}"
+          echo "archiveHash=$sha" >> $env:GITHUB_OUTPUT
+          echo "buildVersion=$ver" >> $env:GITHUB_OUTPUT
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: false
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          tag_name: ${{ steps.details.outputs.buildVersion }}
+          body: |
+            SHA256 of SvgLib.zip: ${{ steps.details.outputs.archiveHash }}  
+            Attachments:  
+            - SvgLib.zip
+              - to be used for the ModInstaller
+            - SvgLib.dll
+              - the mod, also inside SvgLib.zip
+          files: |
+            artifacts/Publish-HK-Mod/SvgLib/SvgLib.zip
+            artifacts/Publish-HK-Mod/SvgLib/SvgLib.dll
