@@ -39,5 +39,17 @@ namespace SvgLib
             get => Element.GetAttribute<double>("height", SvgDefaults.Attributes.Size.Height);
             set => Element.SetAttribute("height", value);
         }
+
+        public double RX
+        {
+            get => Element.GetAttribute<double>("rx", SvgDefaults.Attributes.Radius.RX);
+            set => Element.SetAttribute("rx", value);
+        }
+
+        public double RY
+        {
+            get => Element.GetAttribute<double>("ry", SvgDefaults.Attributes.Radius.RY);
+            set => Element.SetAttribute("ry", value);
+        }
     }
 }
