@@ -1,6 +1,6 @@
 # SvgLib
 
-[![Build status](https://ci.appveyor.com/api/projects/status/rw89jost494vijpn/branch/master?svg=true)](https://ci.appveyor.com/project/huysentruitw/svglib/branch/master)
+[![Build, Test, Publish](https://github.com/huysentruitw/svglib/actions/workflows/build-test-publish.yml/badge.svg?branch=main)](https://github.com/huysentruitw/svglib/actions/workflows/build-test-publish.yml)
 
 Lightweight SVG library for .NET Framework, .NET Standard and .NET Core.
 
