@@ -1,0 +1,50 @@
+name: Build, Test, Publish
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Fetch all history for all tags and branches
+      run: git fetch --prune --unshallow
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v1.1.1
+      with:
+          versionSpec: '5.x'
+    - name: Use GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v1.1.1
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.x'
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+    - name: Test
+      env:
+        CI: true
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity normal
+    - name: Publish
+      if: startsWith(github.ref, 'refs/tags/') && github.repository_owner == 'huysentruitw'
+      shell: pwsh
+      run: |
+        Get-ChildItem ".\src" -Filter "*.nupkg" -R | ForEach-Object {
+          Write-Host "Pushing $($_.Name)"
+          dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
+          if ($lastexitcode -ne 0) {
+            throw ("Exec: " + $errorMessage)
+          }
+        }
