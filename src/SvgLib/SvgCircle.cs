@@ -18,19 +18,19 @@ namespace SvgLib
 
         public double CX
         {
-            get => Element.GetAttribute("cx", SvgDefaults.Attributes.Position.CX);
+            get => Element.GetAttribute<double>("cx", SvgDefaults.Attributes.Position.CX);
             set => Element.SetAttribute("cx", value);
         }
 
         public double CY
         {
-            get => Element.GetAttribute("cy", SvgDefaults.Attributes.Position.CY);
+            get => Element.GetAttribute<double>("cy", SvgDefaults.Attributes.Position.CY);
             set => Element.SetAttribute("cy", value);
         }
 
         public double R
         {
-            get => Element.GetAttribute("r", SvgDefaults.Attributes.Radius.R);
+            get => Element.GetAttribute<double>("r", SvgDefaults.Attributes.Radius.R);
             set => Element.SetAttribute("r", value);
         }
     }

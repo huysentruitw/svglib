@@ -18,25 +18,25 @@ namespace SvgLib
 
         public double X
         {
-            get => Element.GetAttribute("x", SvgDefaults.Attributes.Position.X);
+            get => Element.GetAttribute<double>("x", SvgDefaults.Attributes.Position.X);
             set => Element.SetAttribute("x", value);
         }
 
         public double Y
         {
-            get => Element.GetAttribute("y", SvgDefaults.Attributes.Position.Y);
+            get => Element.GetAttribute<double>("y", SvgDefaults.Attributes.Position.Y);
             set => Element.SetAttribute("y", value);
         }
 
         public double DX
         {
-            get => Element.GetAttribute("dx", SvgDefaults.Attributes.Position.DX);
+            get => Element.GetAttribute<double>("dx", SvgDefaults.Attributes.Position.DX);
             set => Element.SetAttribute("dx", value);
         }
 
         public double DY
         {
-            get => Element.GetAttribute("dy", SvgDefaults.Attributes.Position.DY);
+            get => Element.GetAttribute<double>("dy", SvgDefaults.Attributes.Position.DY);
             set => Element.SetAttribute("dy", value);
         }
 
@@ -46,8 +46,8 @@ namespace SvgLib
 
         public double TextLength
         {
-            get => Element.GetAttribute("textLength", SvgDefaults.Attributes.Size.Width);
-            set => Element.GetAttribute("textLength", value);
+            get => Element.GetAttribute<double>("textLength", SvgDefaults.Attributes.Size.Width);
+            set => Element.SetAttribute("textLength", value);
         }
 
         public string FontFamily
@@ -58,7 +58,7 @@ namespace SvgLib
 
         public double FontSize
         {
-            get => Element.GetAttribute("font-size", 0.0);
+            get => Element.GetAttribute<double>("font-size", SvgDefaults.Attributes.Text.FontSize);
             set => Element.SetAttribute("font-size", value);
         }
 
